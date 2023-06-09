@@ -26,12 +26,12 @@ workspace "Truck In" "Asignación de Servicio de Transporte" {
                 TruckInService = component "TruckInService"
                 
                 //Nuestro API tambien con todos los modulos 
-                RegistrationRepo = component "RegistrationRepository "
-                DriverSearchRepo = component "DriverSearchRepository "
-                AssignamentAgreementRepo = component "AssignmentAgreementRepository"
-                AssignamentManagementRepo = component "AssignmentManagementRepository"
-                ReviewFeedbackRepo = component "Review&FeedbackRepository"
-                ComunicationRepo = component "ComunicationRepository"
+                RegistrationRepo = component "Registration Context "
+                DriverSearchRepo = component "DriverSearch Context "
+                AssignamentAgreementRepo = component "AssignmentAgreement Context"
+                AssignamentManagementRepo = component "AssignmentManagementContext"
+                ReviewFeedbackRepo = component "Review&Feedback Context"
+                ComunicationRepo = component "Comunication Context"
             }
             MobileAPP = container "MobileAPP"{
                 Registration = component "RegistrationContext"
@@ -45,21 +45,20 @@ workspace "Truck In" "Asignación de Servicio de Transporte" {
         }
         
         GM = softwareSystem "Google Maps" "Used for real time location." "GOOGLE MAPS" 
-        MTC = softwareSystem "MTC" "Software of MTC for to perform driver verification" "MTC" 
+         
         RENIEC = softwareSystem "RENIEC" "Used for validate identity of users" "RENIEC" 
         
         
 
         GM -> TRUCKIN "Update and follow up " "Mobile" 
         
-        TRUCKIN -> MTC "reports" 
+        
         TRUCKIN -> RENIEC "reports" 
         TRUCKIN.API -> TRUCKIN.BD "Read and write" 
         Driver -> TRUCKIN.MobileAPP "Search, filter, public and update" 
         TransportManager -> TRUCKIN.MobileAPP "Search, filter, public and update" 
         
         TRUCKIN.API -> RENIEC "Update" 
-        TRUCKIN.API -> MTC "Update" 
         GM -> TRUCKIN.API "Read and update" 
         
         
@@ -127,10 +126,7 @@ workspace "Truck In" "Asignación de Servicio de Transporte" {
             
         }
 
-        component TRUCKIN.BD "Container3" {
-            include * 
-            autoLayout lr
-        }
+        
         styles {
             
             element "Oracle" {
