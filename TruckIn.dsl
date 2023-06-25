@@ -26,20 +26,24 @@ workspace "Truck In" "Asignación de Servicio de Transporte" {
                 TruckInService = component "TruckInService"
                 
                 //Nuestro API tambien con todos los modulos 
-                RegistrationRepo = component "Registration Context "
-                DriverSearchRepo = component "DriverSearch Context "
-                AssignamentAgreementRepo = component "AssignmentAgreement Context"
-                AssignamentManagementRepo = component "AssignmentManagementContext"
-                ReviewFeedbackRepo = component "Review&Feedback Context"
-                ComunicationRepo = component "Comunication Context"
+                PostulationRepo = component "Postulation Context "
+                DriverSearchRepo = component "Driver Search Context "
+                TripRepo = component "Trip Assignament Context"
+                HandlingRepo = component "Handling Context"
+                ReviewRepo = component "Review Context"
+                PaymentRepo = component "Payment Context"
+                IdentityRepo = component "Identity & Access Management Context"
+                ProfileRepo = component "Profile Validation Context"
             }
             MobileAPP = container "MobileAPP"{
-                Registration = component "RegistrationContext"
-                DriverSearch = component "DriverSearch Context"
-                AssignamentAgreement = component "Assignment Agreement Context"
-                AssignamentManagement = component "Assignment Management Context"
-                ReviewFeedback = component "Review&Feedback Context"
-                Comunication = component "Comunication Context" 
+                Postulation = component "Postulation Context "
+                DriverSearch = component "Driver Search Context "
+                Trip = component "Trip Assignament Context"
+                Handling = component "Handling Context"
+                Review = component "Review Context"
+                Payment = component "Payment Context"
+                Identity = component "Identity & Access Management Context"
+                Profile = component "Profile Validation Context"
                 //Si interactua con todos los modulos el Moblie APP
             }
         }
@@ -66,40 +70,51 @@ workspace "Truck In" "Asignación de Servicio de Transporte" {
         Driver -> TRUCKIN "Publish their services as a drivers" "Mobile" 
         TransportManager -> TRUCKIN "Search drivers that meet their expectations" "Mobile" 
         
-        Driver -> TRUCKIN.MobileAPP.Registration "Uses" 
-        Driver -> TRUCKIN.MobileAPP.DriverSearch "Uses" 
-        Driver -> TRUCKIN.MobileAPP.AssignamentAgreement "Uses" 
-        Driver -> TRUCKIN.MobileAPP.AssignamentManagement "Uses" 
-        Driver -> TRUCKIN.MobileAPP.ReviewFeedback "Uses" 
-        Driver -> TRUCKIN.MobileAPP.Comunication "Uses" 
+        Driver -> TRUCKIN.MobileAPP.Postulation "Uses" 
+        Driver -> TRUCKIN.MobileAPP.DriverSearch "Uses"
+        Driver -> TRUCKIN.MobileAPP.Trip "Uses"
+        Driver -> TRUCKIN.MobileAPP.Handling "Uses" 
+        Driver -> TRUCKIN.MobileAPP.Review "Uses" 
+        Driver -> TRUCKIN.MobileAPP.Payment "Uses" 
+        Driver -> TRUCKIN.MobileAPP.Identity "Uses" 
+        Driver -> TRUCKIN.MobileAPP.Profile "Uses"
         
-        TransportManager -> TRUCKIN.MobileAPP.Registration "Uses" 
+        TransportManager -> TRUCKIN.MobileAPP.Postulation "Uses"
         TransportManager -> TRUCKIN.MobileAPP.DriverSearch "Uses" 
-        TransportManager -> TRUCKIN.MobileAPP.AssignamentAgreement "Uses" 
-        TransportManager -> TRUCKIN.MobileAPP.AssignamentManagement "Uses" 
-        TransportManager -> TRUCKIN.MobileAPP.ReviewFeedback "Uses" 
-        TransportManager -> TRUCKIN.MobileAPP.Comunication "Uses"
+        TransportManager -> TRUCKIN.MobileAPP.Trip "Uses"
+        TransportManager -> TRUCKIN.MobileAPP.Handling "Uses"
+        TransportManager -> TRUCKIN.MobileAPP.Review "Uses"  
+        TransportManager -> TRUCKIN.MobileAPP.Payment "Uses"
+        TransportManager -> TRUCKIN.MobileAPP.Identity "Uses" 
+        TransportManager -> TRUCKIN.MobileAPP.Profile "Uses"
         
-        TRUCKIN.MobileAPP.AssignamentManagement -> TRUCKIN.BD
-        TRUCKIN.MobileAPP.Registration -> TRUCKIN.BD
-        TRUCKIN.MobileAPP.DriverSearch -> TRUCKIN.BD
-        TRUCKIN.MobileAPP.AssignamentAgreement -> TRUCKIN.BD
-        TRUCKIN.MobileAPP.ReviewFeedback -> TRUCKIN.BD
-        TRUCKIN.MobileAPP.Comunication -> TRUCKIN.BD 
         
-        TRUCKIN.API.TruckInService -> TRUCKIN.API.RegistrationRepo
+        TRUCKIN.MobileAPP.Postulation   -> TRUCKIN.BD
+        TRUCKIN.MobileAPP.DriverSearch  -> TRUCKIN.BD
+        TRUCKIN.MobileAPP.Trip          -> TRUCKIN.BD
+        TRUCKIN.MobileAPP.Handling      -> TRUCKIN.BD
+        TRUCKIN.MobileAPP.Review        -> TRUCKIN.BD
+        TRUCKIN.MobileAPP.Payment       -> TRUCKIN.BD
+        TRUCKIN.MobileAPP.Identity      -> TRUCKIN.BD 
+        TRUCKIN.MobileAPP.Profile       -> TRUCKIN.BD 
+        
+        TRUCKIN.API.TruckInService -> TRUCKIN.API.PostulationRepo
         TRUCKIN.API.TruckInService -> TRUCKIN.API.DriverSearchRepo
-        TRUCKIN.API.TruckInService -> TRUCKIN.API.AssignamentAgreementRepo
-        TRUCKIN.API.TruckInService -> TRUCKIN.API.AssignamentManagementRepo
-        TRUCKIN.API.TruckInService -> TRUCKIN.API.ReviewFeedbackRepo
-        TRUCKIN.API.TruckInService -> TRUCKIN.API.ComunicationRepo
+        TRUCKIN.API.TruckInService -> TRUCKIN.API.TripRepo
+        TRUCKIN.API.TruckInService -> TRUCKIN.API.HandlingRepo
+        TRUCKIN.API.TruckInService -> TRUCKIN.API.ReviewRepo
+        TRUCKIN.API.TruckInService -> TRUCKIN.API.PaymentRepo
+        TRUCKIN.API.TruckInService -> TRUCKIN.API.IdentityRepo
+        TRUCKIN.API.TruckInService -> TRUCKIN.API.ProfileRepo
         
-        TRUCKIN.API.RegistrationRepo -> TRUCKIN.BD "Read from and write to"
-        TRUCKIN.API.DriverSearchRepo -> TRUCKIN.BD "Read from and write to"
-        TRUCKIN.API.AssignamentAgreementRepo -> TRUCKIN.BD "Read from and write to"
-        TRUCKIN.API.AssignamentManagementRepo -> TRUCKIN.BD "Read from and write to"
-        TRUCKIN.API.ReviewFeedbackRepo -> TRUCKIN.BD "Read from and write to"
-        TRUCKIN.API.ComunicationRepo -> TRUCKIN.BD "Read from and write to"
+        TRUCKIN.API.PostulationRepo     -> TRUCKIN.BD "Read from and write to"
+        TRUCKIN.API.DriverSearchRepo    -> TRUCKIN.BD "Read from and write to"
+        TRUCKIN.API.TripRepo            -> TRUCKIN.BD "Read from and write to"
+        TRUCKIN.API.HandlingRepo        -> TRUCKIN.BD "Read from and write to"
+        TRUCKIN.API.ReviewRepo          -> TRUCKIN.BD "Read from and write to"
+        TRUCKIN.API.PaymentRepo         -> TRUCKIN.BD "Read from and write to"
+        TRUCKIN.API.IdentityRepo        -> TRUCKIN.BD "Read from and write to"
+        TRUCKIN.API.ProfileRepo         -> TRUCKIN.BD "Read from and write to"
         
         TRUCKIN.BD.DriverSearch -> TRUCKIN.API "Give Information"
         TRUCKIN.BD.Registration -> TRUCKIN.API "Set and Give Information"
