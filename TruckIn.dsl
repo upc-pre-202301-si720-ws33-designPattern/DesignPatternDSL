@@ -28,7 +28,7 @@ workspace "Truck In" "Asignación de Servicio de Transporte" {
                 //Nuestro API tambien con todos los modulos 
                 PostulationRepo = component "Postulation Context "
                 DriverSearchRepo = component "Driver Search Context "
-                TripRepo = component "Trip Assignament Context"
+                TripRepo = component "Trip Assignment Context"
                 HandlingRepo = component "Handling Context"
                 ReviewRepo = component "Review Context"
                 PaymentRepo = component "Payment Context"
@@ -38,7 +38,7 @@ workspace "Truck In" "Asignación de Servicio de Transporte" {
             MobileAPP = container "MobileAPP"{
                 Postulation = component "Postulation Context "
                 DriverSearch = component "Driver Search Context "
-                Trip = component "Trip Assignament Context"
+                Trip = component "Trip Assignment Context"
                 Handling = component "Handling Context"
                 Review = component "Review Context"
                 Payment = component "Payment Context"
